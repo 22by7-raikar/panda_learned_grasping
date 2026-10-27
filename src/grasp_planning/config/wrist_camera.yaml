@@ -1,0 +1,11 @@
+# panda_hand -> camera_color_optical_frame.
+# Placeholder for a RealSense D435 on a side bracket of the Franka Hand, looking along
+# the approach axis; replace with your easy_handeye2 (eye-in-hand) calibration result.
+wrist_camera_tf:
+  ros__parameters:
+    parent_frame: panda_hand
+    child_frame: camera_color_optical_frame
+    xyz: [0.05, 0.0, 0.04]
+    # Optical frame: z forward (= hand z), x right, y down. Quaternion x, y, z, w.
+    # Rotated -90 deg about z so image "right" lines up with the hand's -y.
+    quat_xyzw: [0.0, 0.0, -0.7071068, 0.7071068]

@@ -1,0 +1,27 @@
+# Objects packed closely: tests the finger/palm collision checks.
+table:
+  height: 0.0
+  x_range: [0.15, 0.9]
+  y_range: [-0.55, 0.55]
+objects:
+  block_a:
+    pose: [0.50, -0.03, 0.0]
+    type: box
+    size: [0.04, 0.04, 0.06]
+    color: [40, 120, 200]
+  block_b:
+    pose: [0.50, 0.025, 0.0]
+    type: box
+    size: [0.04, 0.04, 0.05]
+    color: [40, 200, 120]
+  bottle:
+    pose: [0.40, 0.0, 0.0]
+    type: cylinder
+    radius: 0.028
+    height: 0.16
+    color: [230, 230, 240]
+  tray:
+    pose: [0.58, -0.15, 0.3]
+    type: box
+    size: [0.15, 0.10, 0.02]
+    color: [120, 80, 160]

@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # Algorithms without ROS: fast feedback on the parts that carry the logic.
+  core:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install C++ dependencies
+        run: sudo apt-get update && sudo apt-get install -y libpcl-dev libeigen3-dev libgtest-dev libopencv-dev
+      - name: relaxed_ik_lite
+        run: |
+          cmake -S src/relaxed_ik_lite -B build/rik -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/rik -j
+          ctest --test-dir build/rik --output-on-failure
+          ./build/rik/ik_benchmark 200
+      - name: grasp_perception
+        run: |
+          cmake -S src/grasp_perception -B build/gp -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/gp -j
+          ctest --test-dir build/gp --output-on-failure
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Python tests
+        run: |
+          pip install pytest numpy pyyaml pillow pandas tabulate
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          PYTHONPATH=src/grasp_learning pytest -q src/grasp_learning/test
+          PYTHONPATH=src/grasp_sim pytest -q src/grasp_sim/test
+          pytest -q src/grasp_planning/test
+      - name: Classical pipeline on rendered scenes
+        run: |
+          for s in default clutter; do
+            PYTHONPATH=src/grasp_sim python -m grasp_sim.scene src/grasp_sim/config/scenes/$s.yaml $s.pcd
+            ./build/gp/detect_grasps_pcd $s.pcd 0.5 0 0.8
+          done
+
+  # Full ROS 2 workspace build (MoveIt nodes, interfaces, launch files).
+  ros2:
+    runs-on: ubuntu-22.04
+    container: ros:humble-ros-base
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          apt-get update
+          apt-get install -y python3-colcon-common-extensions ros-humble-moveit ros-humble-moveit-resources-panda-moveit-config
+          rosdep update
+          rosdep install --from-paths src --ignore-src -y
+      - name: Build
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+      - name: Test (C++ packages)
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon test --packages-select relaxed_ik_lite grasp_perception --event-handlers console_direct+
+          colcon test-result --verbose

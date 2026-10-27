@@ -1,0 +1,25 @@
+# Tabletop scene for the synthetic wrist camera. Poses: [x, y, yaw] in panda_link0,
+# objects rest on the table (z = 0). Sizes in metres, colours RGB.
+table:
+  height: 0.0
+  x_range: [0.15, 0.9]
+  y_range: [-0.55, 0.55]
+objects:
+  mustard_box:
+    pose: [0.52, -0.10, 0.5]
+    type: box
+    size: [0.045, 0.09, 0.12]
+    color: [220, 180, 40]
+  can:
+    pose: [0.42, 0.10, 0.0]
+    type: cylinder
+    radius: 0.033
+    height: 0.10
+    color: [190, 40, 40]
+  spring_clamp:
+    pose: [0.60, 0.12, -2.4]
+    color: [30, 30, 30]
+    parts:
+      - {type: box, size: [0.14, 0.025, 0.025], offset: [0.066, 0.024, 0.35]}
+      - {type: box, size: [0.14, 0.025, 0.025], offset: [0.066, -0.024, -0.35]}
+      - {type: box, size: [0.05, 0.03, 0.03], offset: [-0.01, 0.0, 0.0]}

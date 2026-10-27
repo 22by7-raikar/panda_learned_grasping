@@ -1,0 +1,11 @@
+grasp_learning:
+  ros__parameters:
+    base_frame: panda_link0
+    topic_prefix: /camera/camera
+    model_path: ""          # set from the launch file
+    top_k: 10
+    min_score: 0.3
+    frame_timeout: 2.0
+    max_grasp_depth: 0.04
+    min_contact_depth: 0.006
+    table_clearance: 0.004

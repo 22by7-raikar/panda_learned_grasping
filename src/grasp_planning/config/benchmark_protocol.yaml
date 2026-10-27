@@ -1,0 +1,32 @@
+# Benchmark protocol from the lab's study (Rameshbabu et al., "A Benchmarking Study of
+# Vision-based Robotic Grasping Algorithms", arXiv 2503.11163), which applies the
+# protocol of Bekiroglu et al. (RA-L 2019): 10 YCB objects x 6 placements x 3 trials.
+#
+# Placements follow the lab's benchmarking code (vision_based_grasping_benchmarking,
+# benchmarking_pipeline.py) with the paper's parameters r = 25 cm, theta = 90 deg:
+#   P1 centre, P2 centre + (r, 0), P3 centre + (0, r), P4 centre + (0, -r),
+#   P5 = P3 position rotated +theta, P6 = P4 position rotated -theta.
+# Yaw 0 is the object's orientation on the printed template.
+objects:
+  - 056_tennis_ball
+  - 044_flat_screwdriver
+  - 050_medium_clamp
+  - 051_large_clamp
+  - 052_extra_large_clamp
+  - 011_banana
+  - 012_strawberry
+  - 016_pear
+  - 025_mug
+  - 006_mustard_bottle
+trials: 3
+layout:
+  center: [0.45, 0.0]   # panda_link0, the scan pose's x
+  r: 0.25
+  theta: 1.5708
+poses:          # [x, y, yaw] in panda_link0, metres / radians (generated from layout)
+  P1: [0.45, 0.00, 0.0]
+  P2: [0.70, 0.00, 0.0]
+  P3: [0.45, 0.25, 0.0]
+  P4: [0.45, -0.25, 0.0]
+  P5: [0.45, 0.25, 1.5708]
+  P6: [0.45, -0.25, -1.5708]

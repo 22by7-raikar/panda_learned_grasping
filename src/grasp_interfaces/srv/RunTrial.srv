@@ -1,0 +1,13 @@
+# One benchmark trial: observe, detect, grasp, then the lift / yaw / shake checks.
+string object_name    # e.g. "006_mustard_bottle"
+string pose_id        # placement from the protocol layout, e.g. "P3"
+---
+bool grasp_success    # GSS: the object was picked up (lift stage passed)
+bool lift_passed
+bool yaw_passed
+bool shake_passed
+int32 points          # stages passed
+int32 max_points      # 3
+string failure        # empty, or where it failed (no_grasp, plan_transit, lift, ...)
+float64 detect_time
+float64 planning_time

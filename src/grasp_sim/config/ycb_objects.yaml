@@ -1,0 +1,57 @@
+# Primitive approximations of YCB objects for the synthetic camera (not the real meshes).
+# Dimensions are approximate, from the YCB object set; the object frame origin is the
+# centre of its footprint on the table. Good enough for exercising the pipeline and the
+# protocol end to end; benchmark numbers must come from the real robot.
+011_banana:
+  color: [235, 200, 50]
+  parts:
+    - {type: box, size: [0.07, 0.035, 0.035], offset: [-0.06, -0.012, 0.35]}
+    - {type: box, size: [0.07, 0.036, 0.036], offset: [0.0, 0.0, 0.0]}
+    - {type: box, size: [0.07, 0.035, 0.035], offset: [0.06, -0.012, -0.35]}
+016_pear:
+  color: [180, 200, 60]
+  parts:
+    - {type: cylinder, radius: 0.033, height: 0.07}
+    - {type: cylinder, radius: 0.022, height: 0.10}
+012_strawberry:
+  color: [200, 30, 40]
+  parts:
+    - {type: box, size: [0.05, 0.04, 0.04]}
+025_mug:
+  color: [200, 60, 60]
+  parts:
+    - {type: cylinder, radius: 0.04, height: 0.082}
+    - {type: box, size: [0.035, 0.012, 0.06], offset: [0.055, 0.0, 0.0]}
+006_mustard_bottle:
+  color: [230, 200, 30]
+  parts:
+    - {type: box, size: [0.058, 0.095, 0.19]}
+044_flat_screwdriver:
+  color: [60, 60, 200]
+  parts:
+    - {type: box, size: [0.10, 0.032, 0.032], offset: [-0.055, 0.0, 0.0]}
+    - {type: box, size: [0.11, 0.008, 0.008], offset: [0.05, 0.0, 0.0]}
+056_tennis_ball:
+  color: [200, 230, 60]
+  parts:
+    - {type: cylinder, radius: 0.032, height: 0.064}
+# Spring clamps: two arms meeting at a pivot, outer size from the YCB set
+# (medium ~ 0.09 x 0.115, large ~ 0.125 x 0.165, extra large ~ 0.165 x 0.213 m).
+050_medium_clamp:
+  color: [25, 25, 25]
+  parts:
+    - {type: box, size: [0.09, 0.018, 0.022], offset: [0.035, 0.016, 0.30]}
+    - {type: box, size: [0.09, 0.018, 0.022], offset: [0.035, -0.016, -0.30]}
+    - {type: box, size: [0.03, 0.03, 0.027], offset: [-0.015, 0.0, 0.0]}
+051_large_clamp:
+  color: [25, 25, 25]
+  parts:
+    - {type: box, size: [0.125, 0.022, 0.026], offset: [0.05, 0.022, 0.30]}
+    - {type: box, size: [0.125, 0.022, 0.026], offset: [0.05, -0.022, -0.30]}
+    - {type: box, size: [0.04, 0.04, 0.032], offset: [-0.02, 0.0, 0.0]}
+052_extra_large_clamp:
+  color: [25, 25, 25]
+  parts:
+    - {type: box, size: [0.165, 0.026, 0.03], offset: [0.065, 0.028, 0.30]}
+    - {type: box, size: [0.165, 0.026, 0.03], offset: [0.065, -0.028, -0.30]}
+    - {type: box, size: [0.05, 0.05, 0.037], offset: [-0.025, 0.0, 0.0]}

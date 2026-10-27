@@ -1,0 +1,7 @@
+# Run grasp detection on the next camera frame that arrives after the request.
+float64 timeout               # [s] max wait for a fresh frame; 0 = use node default
+---
+bool success
+string message
+grasp_interfaces/Grasp[] grasps   # best first
+float64 compute_time              # [s] perception + grasp synthesis/inference

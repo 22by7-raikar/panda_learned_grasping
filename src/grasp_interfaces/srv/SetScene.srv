@@ -1,0 +1,6 @@
+# Replace the simulated scene (grasp_sim synthetic camera). Same YAML format as
+# grasp_sim/config/scenes/*.yaml.
+string scene_yaml
+---
+bool success
+string message
